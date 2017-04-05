@@ -1,0 +1,13 @@
+﻿{ "name":   "Flat box01", "extent_dimension": "width", "height":  "3", "width":   "12", "depth":   "15.5", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Flat box01", "extent_dimension": "width", "height":  "3", "width":   "12", "depth":   "16", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Flat box02", "extent_dimension": "width", "height":  "3", "width":   "21", "depth":   "25", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Flat box03", "extent_dimension": "width", "height":  "3", "width":   "9", "depth":   "11", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Flat box04", "extent_dimension": "width", "height":  "3", "width":   "17", "depth":   "21", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Flat box05", "extent_dimension": "width", "height":  "1.5", "width":   "17", "depth":   "21", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Flat box06", "extent_dimension": "width", "height":  "1.5", "width":   "21", "depth":   "25", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Legal full box", "extent_dimension": "width", "height":  "10.5", "width":   "5", "depth":   "15.5", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Legal half box", "extent_dimension": "width", "height":  "10.5", "width":   "2.5", "depth":   "15.5", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Letter full box", "extent_dimension": "width", "height":  "10.5", "width":   "5", "depth":   "12.5", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Letter half box", "extent_dimension": "width", "height":  "10.5", "width":   "2.5", "depth":   "12.5", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Postcard box", "extent_dimension": "width", "height":  "5.5", "width":   "3.5", "depth":   "7", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
+{ "name":   "Record center box", "extent_dimension": "width", "height":  "10.5", "width":   "13.1", "depth":   "15.75", "dimension_units": "inches", "jsonmodel_type": "container_profile" }
