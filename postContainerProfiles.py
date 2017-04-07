@@ -33,11 +33,12 @@ print 'This script will add the container_profiles included in a separate json f
 
 # post container_profiles
 print 'The following container profiles have been added to ArchivesSpace:'
-records = json.load(open('containerProfiles.json'))
-for i in range (0, len (records)):
-    toPost = json.dumps(records[i])
-    post = requests.post(baseURL + '/container_profiles', headers=headers, data=toPost).json()
-    print post
+jsonfile = open('containerProfiles.json')
+jsonfile = json.load(jsonfile)
+for line in jsonfile:
+	toPost = json.dumps(line)
+	post = requests.post(baseURL + '/container_profiles', headers=headers, data=toPost).json()
+	print post
 
 # show script runtime
 elapsedTime = time.time() - startTime
