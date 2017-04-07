@@ -35,6 +35,7 @@ print 'This script replace existing fauxcodes with real barcodes (linked in a se
 reader = csv.DictReader(open('barcodes.csv'))
 
 # GET each top_container listed in top_containers and add to records
+print 'The following barcodes have been updated in ArchivesSpace:'
 for row in reader:
 	uri = row['uri']
 	output = requests.get(baseURL + uri, headers=headers).json()
