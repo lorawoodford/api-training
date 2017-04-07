@@ -3,7 +3,7 @@ This repo holds additional resources for attendees of the "There's An API for th
 
 **We highly recommend AGAINST making any changes or using any of these scripts against your working, or Production, instance of ArchivesSpace.** If you do not have a Development version of AS, see the take home documentation for details on how to ask for one.
 
-Note that GET scripts are not that risky, so if you cannot or will not have a Dev instance of AS, you can still try GETs as your familiarize yourself with our scripts. If fear of making mistakes is holding you back, and rightly so, you should investigate options for running a Dev or Virtual Machine (VM) of AS. If you insutition decides to ramp up its use of APIs, a testing environment is a necessity.
+Note that GET scripts are not that risky, so if you cannot or will not have a Dev instance of AS, you can still try GETs as your familiarize yourself with our scripts. If fear of making mistakes is holding you back, and rightly so, you should investigate options for running a Dev or Virtual Machine (VM) of AS. If your insutition decides to ramp up its use of APIs, a testing environment is a necessity.
 
 How do I use these?
 1. Read below to get a general understanding of what scripts are offered here.
@@ -24,10 +24,12 @@ backendurl='archivesspace.fakelibrary.edu:8089'
 user='archivist21'
 password='guest1234'
 ```
-Your first step should be to populate this secrets file with your own information.
+Once you download this, populate this secrets file with your own information.
 
 ## Get a single Resource record with getSingleRecord.py
-This GET script retrieves a single ArchivesSpace record based on the record's 'uri,' which is specified in the 'endpoint' variable on line 13.
+This GET script retrieves a single ArchivesSpace record based on the record's 'uri,' which is specified in the 'endpoint' variable on line 13. The resulting output is named ASrecord.json, and will appear in the same directoy as where you saved the script.
 
 How to use:
-1. Download to a local directory
+1. Download to a local directory and open in Atom
+2. Investigate line 13. Change the URI to reflect which AS resource you want to download. If you do not know, go to the AS interface, navigate to the record, and look at the address bar.
+3. 
