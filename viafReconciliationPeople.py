@@ -1,3 +1,5 @@
+# For original script by Eric Hanson, see: https://github.com/ehanson8/viaf-dbpedia-reconciliation-python/blob/master/viafReconciliationPeople.py
+
 import requests
 import csv
 from fuzzywuzzy import fuzz
@@ -7,10 +9,11 @@ import urllib
 baseURL = 'http://viaf.org/viaf/search/viaf?query=local.personalNames+%3D+%22'
 f=csv.writer(open('viafPeopleResults.csv', 'wb'))
 f.writerow(['search']+['result']+['viaf']+['lc']+['isni']+['ratio']+['partialRatio']+['tokenSort']+['tokenSet']+['avg'])
-with open('people.txt') as txt:
-    for row in txt:
-        print row
-        rowEdited = urllib.quote(row.decode('utf-8-sig').encode('utf-8').strip())
+with open('people.csv') as csvfile:
+    reader = csv.DictReader(csvfile)
+    for row in reader:
+        name = str(row['name'])
+        rowEdited = urllib.quote(name.strip())
         url = baseURL+rowEdited+'%22+and+local.sources+%3D+%22lc%22&sortKeys=holdingscount&maximumRecords=1&httpAccept=application/rdf+json'
         response = requests.get(url).content
         try:
@@ -41,5 +44,4 @@ with open('people.txt') as txt:
         else:
             lc = ''
             isni = ''
-        f=csv.writer(open('viafPeopleResults.csv', 'a'))
-        f.writerow([row.strip()]+[label]+[viafid]+[lc]+[isni]+[ratio]+[partialRatio]+[tokenSort]+[tokenSet]+[avg])
+        f.writerow([name.strip()]+[label]+[viafid]+[lc]+[isni]+[ratio]+[partialRatio]+[tokenSort]+[tokenSet]+[avg])
