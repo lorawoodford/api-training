@@ -32,4 +32,4 @@ This GET script retrieves a single ArchivesSpace record based on the record's 'u
 How to use:
 1. Download to a local directory and open in Atom
 2. Investigate line 13. Change the URI to reflect which AS resource you want to download. If you do not know, go to the AS interface, navigate to the record, and look at the address bar.
-3. 
+3. fff
