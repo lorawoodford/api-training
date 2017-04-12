@@ -92,7 +92,7 @@ for crawl in crawlList:
     ASpost['dates'] = {'expression': crawl['timestamp'], 'date_type': 'single', 'label': 'creation'}
     ASpost['file_versions'] = {'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}
     ASpost['linked_instances'] = {'ref': aos}
-    post = requests.post(baseURL + '/repositories/2/digital_objects/', headers=headers, data=ASpost).json()
+    post = requests.post(baseURL + '/repositories/2/digital_objects/', headers=headers, data=json.dumps(ASpost)).json()
     print post
 
 # TO DO
