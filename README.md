@@ -55,4 +55,4 @@ This script sources from _barcodes.csv_ to post barcodes into ArchivesSpace. Bot
 ## asLinkProfiles.py
 This script assigns a single container profile to all the containers in a collection. This can be done in the actual AS interface, but serves as a good example of a more complex script. The first few actions of the script would be a good starting point for any API action that requires identifying all the containers associated with a single collection.
 
-This script first prompts the user for a resource number, goes and fetches and a containers associated with that resource, then prompts the user for a container profile number, and then creates the link between each container and that profile. Note that there must already be container profiles in AS before running this script.
+This script first prompts the user for a resource number, goes and fetches all the containers associated with that resource, then prompts the user for a container profile number, and then creates the link between each container and that profile. Note that there must already be container profiles in AS for this script to work.
