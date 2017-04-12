@@ -97,11 +97,16 @@ for crawl in crawlList:
     post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=json.dumps(ASpost)).json()
     print post
     aoGet = requests.get(baseURL + aos[0], headers=headers).json()
-    aoGet['linked_instances'] = [{'ref': post['uri']}]
-    for i in aoGet:
-        aoUpdate = requests.post(baseURL + aos[0], headers=headers, data=json.dumps(aoGet)).json()
-        print aoUpdate
+    aoGet['instances'] = [{'digital_object': {'ref': post['uri']}, 'instance_type': 'digital_object'}]
+    aoUpdate = requests.post(baseURL + aos[0], headers=headers, data=json.dumps(aoGet)).json()
+    print aoUpdate
 
 # TO DO
 # Parse dates for ArchivesSpace record, push to AOs above
 # Add phystech stating "Archived website" to ASpace resource record
+
+# show script runtime
+elapsedTime = time.time() - startTime
+m, s = divmod(elapsedTime, 60)
+h, m = divmod(m, 60)
+print 'Post complete. Total script run time: ', '%d:%02d:%02d' % (h, m, s)
