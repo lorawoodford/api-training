@@ -80,9 +80,12 @@ for i in range (1, len (AIoutput)):
     crawlList.append(crawl)
 
 for crawl in crawlList:
-    crawl['digital_object_id'] = urllib.quote('https://wayback.archive-it.org/') + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
-    crawl['title'] = 'Web crawl of ' + urllib.quote(crawl['original'])
-    print crawl
+    ASpost = {}
+    ASpost['digital_object_id'] = 'https://wayback.archive-it.org/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
+    ASpost['title'] = 'Web crawl of ' + crawl['original']
+    ASpost['dates'] = {'expression': crawl['timestamp'], 'date_type': 'single'}
+    ASpost['file_versions'] = {'file_uri': crawl['filename'], 'checksum': crawl['digest']}
+    print ASpost
     # crawlDate = crawl['timestamp']
     # crawlUrl = crawl['original']
     # crawlFile = crawl['filename']
