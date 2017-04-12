@@ -1,4 +1,4 @@
-import requests, json, secrets, time
+import requests, json, secrets, time, urllib
 
 startTime = time.time()
 
@@ -70,11 +70,28 @@ for url in urls:
     request = 'http://wayback.archive-it.org/' + archiveit_coll + '/timemap/json/' + url
     AIoutput = requests.get(request).json()
 
+keys = AIoutput[0]
+crawlList = []
 for i in range (1, len (AIoutput)):
-    keys = AIoutput[0]
-    values = AIoutput[i]
-    merged = zip(keys, values)
-    print json.dumps(merged)
+    AIlist = AIoutput[i]
+    crawl = {}
+    for j in range (0, len(AIlist)):
+        crawl[keys[j]] = AIlist[j]
+    crawlList.append(crawl)
+
+for crawl in crawlList:
+    json.dumps(crawlList)
+    crawlDate = crawl['timestamp']
+    crawlUrl = crawl['original']
+    crawlFile = crawl['filename']
+    crawlDigest = crawl['digest']
+    digital_object_id = urllib.quote('https://wayback.archive-it.org/' + archiveit_coll + '/' + crawlDate + '/' + crawlUrl)
+    title = 'Web crawl of ' + urllib.quote(crawlUrl)
+    jsonmodel_type = 'digital_object'
+    digObj = '{"digital_object_id": "' + digital_object_id + '", "title": "' + title + '", "jsonmodel_type": "' + jsonmodel_type + '", "dates": [{"expression": "' + crawlDate + '", "date_type": "single", "label": "creation", "jsonmodel_type": "date"}], "file_versions": [{"file_uri": "' + crawlFile + '", "checksum": "' + crawlDigest + '", "checksum_method": "sha-1", "jsonmodel_type": "file_version"}], "linked_instances": [{"ref": "/repositories/2/archival_objects/1230"}]}'
+    print digObj
+    # post = requests.post(baseURL + '/repositories/2/digital_objects/', headers=headers, data=json.dumps(digObj)).json()
+    # print post
 
 # Parse dates for ArchivesSpace record
 # Add phystech stating "Archived website" to ASpace record
