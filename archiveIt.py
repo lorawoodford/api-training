@@ -60,10 +60,16 @@ ASoutput = requests.get(baseURL + query, headers=headers).json()
 
 #archiveit_coll = raw_input('Enter the Archive-It collection number: ')
 archiveit_coll = '3181'
-#url = raw_input('Enter the url you wish to search: ')
+
+# search AS for url's included as the title field in an AS archival_object with level "Web archive"
 urls = []
 for value in gen_dict_extract('title', ASoutput):
     urls.append(value)
+
+# search AS and store uri for AS archival_object with level "Web archive"
+aos = []
+for value in gen_dict_extract('uri', ASoutput):
+    aos.append(value)
 
 for url in urls:
     json.dumps(url)
@@ -83,24 +89,12 @@ for crawl in crawlList:
     ASpost = {}
     ASpost['digital_object_id'] = 'https://wayback.archive-it.org/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
     ASpost['title'] = 'Web crawl of ' + crawl['original']
-    ASpost['dates'] = {'expression': crawl['timestamp'], 'date_type': 'single'}
-    ASpost['file_versions'] = {'file_uri': crawl['filename'], 'checksum': crawl['digest']}
-    print ASpost
-    # crawlDate = crawl['timestamp']
-    # crawlUrl = crawl['original']
-    # crawlFile = crawl['filename']
-    # crawlDigest = crawl['digest']
-    # digital_object_id = urllib.quote('https://wayback.archive-it.org/' + archiveit_coll + '/' + crawlDate + '/' + crawlUrl)
-    # title = 'Web crawl of ' + urllib.quote(crawlUrl)
-    # jsonmodel_type = 'digital_object'
-    # digObj = '{"digital_object_id": "' + digital_object_id + '", "title": "' + title + '", "jsonmodel_type": "' + jsonmodel_type + '", "dates": [{"expression": "' + crawlDate + '", "date_type": "single", "label": "creation", "jsonmodel_type": "date"}], "file_versions": [{"file_uri": "' + crawlFile + '", "checksum": "' + crawlDigest + '", "checksum_method": "sha-1", "jsonmodel_type": "file_version"}], "linked_instances": [{"ref": "/repositories/2/archival_objects/1230"}]}'
-    # print digObj
-    # # post = requests.post(baseURL + '/repositories/2/digital_objects/', headers=headers, data=json.dumps(digObj)).json()
-    # # print post
+    ASpost['dates'] = {'expression': crawl['timestamp'], 'date_type': 'single', 'label': 'creation'}
+    ASpost['file_versions'] = {'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}
+    ASpost['linked_instances'] = {'ref': aos}
+    post = requests.post(baseURL + '/repositories/2/digital_objects/', headers=headers, data=ASpost).json()
+    print post
 
-# Parse dates for ArchivesSpace record
+# TO DO
+# Parse dates for ArchivesSpace record, push to AOs above
 # Add phystech stating "Archived website" to ASpace record
-# Checksum in the dao?
-# In dev subjects/202 is for "Web sites"
-
-# [[u'urlkey', u'timestamp', u'original', u'mimetype', u'statuscode', u'digest', u'redirect', u'robotflags', u'length', u'offset', u'filename'], [u'edu,jhu,library)/', u'20150625180455', u'http://www.library.jhu.edu/', u'text/html', u'200', u'AZ2TUETPDGYB4IJDOF2KRX7JCIYUYL3U', u'-', u'-', u'10225', u'28636', u'ARCHIVEIT-3181-CRAWL_SELECTED_SEEDS-JOB161970-20150625180453753-00000.warc.gz'],
