@@ -70,7 +70,11 @@ for url in urls:
     request = 'http://wayback.archive-it.org/' + archiveit_coll + '/timemap/json/' + url
     AIoutput = requests.get(request).json()
 
-print AIoutput
+for i in range (1, len (AIoutput)):
+    keys = AIoutput[0]
+    values = AIoutput[i]
+    merged = zip(keys, values)
+    print json.dumps(merged)
 
 # Parse dates for ArchivesSpace record
 # Add phystech stating "Archived website" to ASpace record
