@@ -71,11 +71,13 @@ aos = []
 for value in gen_dict_extract('uri', ASoutput):
     aos.append(value)
 
+# search AI and get json of crawls for url listed in AS ao's title field
 for url in urls:
     json.dumps(url)
     request = 'http://wayback.archive-it.org/' + archiveit_coll + '/timemap/json/' + url
     AIoutput = requests.get(request).json()
 
+# take AI json lists and convert to python dicts
 keys = AIoutput[0]
 crawlList = []
 for i in range (1, len (AIoutput)):
@@ -85,17 +87,21 @@ for i in range (1, len (AIoutput)):
         crawl[keys[j]] = AIlist[j]
     crawlList.append(crawl)
 
+# construct json to post to AS
 for crawl in crawlList:
     ASpost = {}
     ASpost['digital_object_id'] = 'https://wayback.archive-it.org' + '/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
     ASpost['title'] = 'Web crawl of ' + crawl['original']
     ASpost['dates'] = [{'expression': crawl['timestamp'], 'date_type': 'single', 'label': 'creation'}]
     ASpost['file_versions'] = [{'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}]
-    ASpost['linked_instances'] = [{'ref': aos}]
-    print ASpost
-    post = requests.post(baseURL + '/repositories/2/digital_objects/', headers=headers, data=json.dumps(ASpost)).json()
+    post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=json.dumps(ASpost)).json()
     print post
+    aoGet = requests.get(baseURL + aos[0], headers=headers).json()
+    aoGet['linked_instances'] = [{'ref': post['uri']}]
+    for i in aoGet:
+        aoUpdate = requests.post(baseURL + aos[0], headers=headers, data=json.dumps(aoGet)).json()
+        print aoUpdate
 
 # TO DO
 # Parse dates for ArchivesSpace record, push to AOs above
-# Add phystech stating "Archived website" to ASpace record
+# Add phystech stating "Archived website" to ASpace resource record
