@@ -80,18 +80,20 @@ for i in range (1, len (AIoutput)):
     crawlList.append(crawl)
 
 for crawl in crawlList:
-    json.dumps(crawlList)
-    crawlDate = crawl['timestamp']
-    crawlUrl = crawl['original']
-    crawlFile = crawl['filename']
-    crawlDigest = crawl['digest']
-    digital_object_id = urllib.quote('https://wayback.archive-it.org/' + archiveit_coll + '/' + crawlDate + '/' + crawlUrl)
-    title = 'Web crawl of ' + urllib.quote(crawlUrl)
-    jsonmodel_type = 'digital_object'
-    digObj = '{"digital_object_id": "' + digital_object_id + '", "title": "' + title + '", "jsonmodel_type": "' + jsonmodel_type + '", "dates": [{"expression": "' + crawlDate + '", "date_type": "single", "label": "creation", "jsonmodel_type": "date"}], "file_versions": [{"file_uri": "' + crawlFile + '", "checksum": "' + crawlDigest + '", "checksum_method": "sha-1", "jsonmodel_type": "file_version"}], "linked_instances": [{"ref": "/repositories/2/archival_objects/1230"}]}'
-    print digObj
-    # post = requests.post(baseURL + '/repositories/2/digital_objects/', headers=headers, data=json.dumps(digObj)).json()
-    # print post
+    crawl['digital_object_id'] = urllib.quote('https://wayback.archive-it.org/') + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
+    crawl['title'] = 'Web crawl of ' + urllib.quote(crawl['original'])
+    print crawl
+    # crawlDate = crawl['timestamp']
+    # crawlUrl = crawl['original']
+    # crawlFile = crawl['filename']
+    # crawlDigest = crawl['digest']
+    # digital_object_id = urllib.quote('https://wayback.archive-it.org/' + archiveit_coll + '/' + crawlDate + '/' + crawlUrl)
+    # title = 'Web crawl of ' + urllib.quote(crawlUrl)
+    # jsonmodel_type = 'digital_object'
+    # digObj = '{"digital_object_id": "' + digital_object_id + '", "title": "' + title + '", "jsonmodel_type": "' + jsonmodel_type + '", "dates": [{"expression": "' + crawlDate + '", "date_type": "single", "label": "creation", "jsonmodel_type": "date"}], "file_versions": [{"file_uri": "' + crawlFile + '", "checksum": "' + crawlDigest + '", "checksum_method": "sha-1", "jsonmodel_type": "file_version"}], "linked_instances": [{"ref": "/repositories/2/archival_objects/1230"}]}'
+    # print digObj
+    # # post = requests.post(baseURL + '/repositories/2/digital_objects/', headers=headers, data=json.dumps(digObj)).json()
+    # # print post
 
 # Parse dates for ArchivesSpace record
 # Add phystech stating "Archived website" to ASpace record
