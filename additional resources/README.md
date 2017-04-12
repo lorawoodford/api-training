@@ -48,4 +48,4 @@ How to use:
 
 
 ## ArchivesSpace_Phila2016_Celia-ODBC.pdf
-This is a pdf of a presentation given by Celia Caust-Ellenbogen crediting and explaingin Nancy Enneking's approach to connecting ArchivesSpace to Access through an ODBC connection. For those attendees that wish the API could assist in reporting, this is our recommended route to solving that need until AS itself updates its reporting features.
+This is a pdf of a presentation given by Celia Caust-Ellenbogen (Swarthmore) crediting and explaining Nancy Enneking's (Getty) approach to connecting ArchivesSpace to Access through an ODBC connection. For those attendees that wish the API could assist in reporting and analysis, this is our recommended approach. Thanks to Celia for her permission to post these slides, and much credit and thanks to Nancy by proxy!
