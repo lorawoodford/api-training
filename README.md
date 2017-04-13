@@ -63,8 +63,8 @@ password='admin'
 ```
 Once you download, populate this secrets file with your own information.
 
-## postContainerProfiles.py
-This script sources from _containerProfiles.json_ to post container profiles into ArchivesSpace. Both files must be downloaded to the same directory for this script to run. You can edit _containerProfiles.json_ if you'd like to try posting in different profiles.
+## [postContainerProfiles.py](../master/postContainerProfiles.py)
+This script sources from _[containerProfiles.json](../master/containerProfiles.json)_ to post container profiles into ArchivesSpace. Both files must be downloaded to the same directory for this script to run. You can edit _containerProfiles.json_ if you'd like to try posting in different profiles.
 
 You can run this script by typing `python postContainerProfiles.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac ternimal from the directory where the script is stored.
 
