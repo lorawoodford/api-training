@@ -1,5 +1,5 @@
 # Additional Resources for the MARAC_API_Workshop
-This repo holds additional resources for attendees of the "There's An API for that!" workshops sponsored by the Mid-Atlantic Regional Archives Conference in 2017. 
+This repo holds additional resources for attendees of the "There's An API for that!" workshops sponsored by the Mid-Atlantic Regional Archives Conference in 2017.
 
 ## Get a single Resource record with _getSingleRecord.py_
 This GET script retrieves a single ArchivesSpace record based on the record's 'uri,' which is specified in the 'endpoint' variable on line 13. The resulting output is named ASrecord.json, and will appear in the same directoy as where you saved the script.
@@ -13,3 +13,8 @@ How to use:
 
 ## ArchivesSpace_Phila2016_Celia-ODBC.pdf
 This is a pdf of a presentation given by Celia Caust-Ellenbogen (Swarthmore) crediting and explaining Nancy Enneking's (Getty) approach to connecting ArchivesSpace to Access through an ODBC connection. For those attendees that wish the API could assist in reporting and analysis, this is our recommended approach. Thanks to Celia for her permission to post these slides, and much credit and thanks to Nancy by proxy!
+
+
+
+
+http://www.gregwiedeman.com/presentations/slides/wasapi.html#/
