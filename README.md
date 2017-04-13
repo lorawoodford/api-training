@@ -1,15 +1,20 @@
 # MARAC_API_Workshop
 These are the resources used in the "There's An API for that!" workshops sponsored by the Mid-Atlantic Regional Archives Conference in 2017. Note that these are the scripts used in the workshop itself. For additional scripts and resources referenced in the workshop, navigate to the _additional resources_ subfolder, above.
 
-These scripts and this documentation, combined with the workshop itself, are meant to encourage users to try Python scripting at their home institutions. The following details are meant to be understood in order.
+These scripts and this documentation, combined with the workshop itself, are meant to encourage and empower users to run Python scripts at their home institutions. The following details are meant to be understood in order.
 
-**We highly recommend AGAINST making any changes or using any of these scripts against your working, or Production, instance of ArchivesSpace.** If you do not have a Development version of AS, see the take home documentation for advice on how to ask for one.
-
-Note that GET scripts are not that risky, so if you cannot or will not have a Dev instance of AS, you can still try GETs as your familiarize yourself with our scripts. If fear of making mistakes is holding you back, and rightly so, you should investigate options for running a Dev or Virtual Machine (VM) of AS. If your insutition decides to ramp up its use of APIs, a testing environment is a necessity.
 
 #### How do I use these?
-1. You'll always need at least two things to run one of our scripts: the script itself and the secrets.py file, and they must both be in the same directory.
-2. A brief description of what each script does follows this long introduction. You used each of these scripts in the workshop itself, and so these descriptions will be familiar. These scripts, as opposed to the ones offered in the _additional resources_ subfolder, above, are highly specific to the workshop, but if you're interested in learning Python, it may help to look at a script you've already used.
+
+First, a necessary disclaimer: **We highly recommend AGAINST making any changes or using any of these scripts against your working, or Production, instance of ArchivesSpace.** If you do not have a Development version of AS, see the take home documentation for advice on how to ask for one. Note that GET scripts are not that risky, so if you cannot or will not have a Dev instance of AS, you can still try GETs as your familiarize yourself with our scripts. If fear of making mistakes is holding you back, and rightly so, you should investigate options for running a Dev or Virtual Machine (VM) of AS. If your insutition decides to ramp up its use of APIs, a testing environment is a necessity.
+
+Second, remember the vagrant box that you were provided in the course of the workshop. That vagrant, now stored locally on the laptop you brought to the workshop, is our gift to you. We encourage truly novice users who may be wary to try anything on real data to play in the vagrant environment first. No matter what you do there you cannot break anything, and if you mess up your data, just `vagrant destroy` and `vagrant up` again!
+
+There's very little data in the default box, but once you have it up and running you can:
++ manually enter data just like you would in AS
++ import your own collections via EAD
++ more advanced users can use our GET scripts to pull down resource records from your own AS and POST them to the vagrant (remember that the vagrat endpoint will begin with http://localhost:8089)
+
 
 #### How do I _run_ these?
 This is a subtly different question from the above. This section gives practical advice for how to run these scripts, though it still raises more questions than answers. The first thing you need to know is what operating system (OS) you are using, and what OS architecture underlies the system you want to communicate to. So for example, ArchivesSpace is Linux-based, and Windows cannot communicate directly with a Linux-based app, but OS X (Macs) can.
@@ -27,6 +32,13 @@ This is a subtly different question from the above. This section gives practical
 * *Mac users*
 
    There is a reason why developers love Macs: they're easy! You should be able to run these scripts directly from the terminal with no problem. However, you may encounter other scripts that don't run: you're probably missing packages. Our best advice is to Google the exact error message that pops up (if one does), and chances are you'll find the solution online.
+
+Instructions   
+
+   1. You'll always need at least two things to run one of our scripts: the script itself and the secrets.py file, and they must both be in the same directory.
+   2. A brief description of what each script does follows this long introduction. You used each of these scripts in the workshop itself, and so these descriptions will be familiar. These scripts, as opposed to the ones offered in the _additional resources_ subfolder, above, are highly specific to the workshop, but if you're interested in learning Python, it may help to look at a script you've already used.
+
+
 
 ## Authenticating with secrets.py
 Note: secrets._pyc_ is created automatically; you do not need to download it. You're only downloading secrets.py
