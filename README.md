@@ -39,7 +39,7 @@ More FYIs to read
    2. A brief description of what each script does follows this long introduction. You used each of these scripts in the workshop itself, and so these descriptions will be familiar. These scripts, as opposed to the ones offered in the _additional resources_ subfolder, above, are highly specific to the workshop, but if you're interested in learning Python, it may help to look at a script you've already used.
 
 
-## Authenticating with [secrets.py](../blob/master/secrets.py)
+## Authenticating with [secrets.py](../master/secrets.py)
 Note: You're only downloading secrets.py; secrets._pyc_ is created automatically and you do not need to download it.
 
 Several of these scripts used for interacting with the ArchivesSpace API call a separate secrets.py that should be in the following format:
