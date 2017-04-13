@@ -83,31 +83,37 @@ for ao in ASoutput['results']:
     # construct json to post to AS
     doList = []
     for crawl in crawlList:
-        ASpost = {}
         doid = 'https://wayback.archive-it.org' + '/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
-        ASpost['digital_object_id'] = doid
         query = '/search?page=1&page_size=100&filter_term[]={"primary_type":"digital_object"}&q=' + doid
         existingdoID = requests.get(baseURL + query, headers=headers).json()
         if len(existingdoID['results']) != 0:
             print 'Digital object already exists.'
         else:
-            ASpost['title'] = 'Web crawl of ' + crawl['original']
-            ASpost['dates'] = [{'expression': crawl['timestamp'], 'date_type': 'single', 'label': 'creation'}]
-            ASpost['file_versions'] = [{'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}]
-            post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=json.dumps(ASpost)).json()
-            doItem = {}
-            doItem['digital_object'] = {'ref': post['uri']}
-            doItem['instance_type'] = 'digital_object'
-            doList.append(doItem)
-            if doList != []:
-                aoGet = requests.get(baseURL + uri, headers=headers).json()
-                existingInstances = aoGet['instances']
-                existingInstances = existingInstances + doList
-                aoGet['instances'] = existingInstances
-            print json.dumps(aoGet)
-            aoUpdate = requests.post(baseURL + uri, headers=headers, data=json.dumps(aoGet)).json()
-            print aoUpdate
-            aoGet = []
+            doPost = {}
+            doPost['digital_object_id'] = doid
+            doPost['title'] = 'Web crawl of ' + crawl['original']
+            doPost['dates'] = [{'expression': crawl['timestamp'], 'date_type': 'single', 'label': 'creation'}]
+            doPost['file_versions'] = [{'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}]
+            doJson = json.dumps(doPost)
+            post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=doJson).json()
+            for i in post:
+                doItem = {}
+                doItem['digital_object'] = {'ref': post['uri']}
+                doItem['instance_type'] = 'digital_object'
+                doList.append(doItem)
+                doListJson = json.dumps(doList)
+                print doListJson 
+                #find a way to post just the last
+            # doList keeps agregating and the final array has everything for a single ao in it...
+                # if doList != []:
+                #     aoGet = requests.get(baseURL + uri, headers=headers).json()
+                #     existingInstances = aoGet['instances']
+                #     existingInstances = existingInstances + doList
+                #     aoGet['instances'] = existingInstances
+                # print json.dumps(aoGet)
+                # aoUpdate = requests.post(baseURL + uri, headers=headers, data=json.dumps(aoGet)).json()
+                # print aoUpdate
+                # aoGet = []
 # #
 # # TO DO
 # # Parse dates for ArchivesSpace record, push to AOs above
