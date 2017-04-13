@@ -80,4 +80,15 @@ You can run this script by typing `python asLinkProfiles.py` in cygwin/the Mac t
 
 
 ## [viafReconciliationPeople.py](../master/viafReconciliationPeople.py)
-This script looks for a CSV named _people.csv_ and then uses VIAF's "personalNames" index and retrieves VIAF, Library of Congress, and International Standard Name Identifier (ISNI) URIs for each potential match. These results are written to a new file named _viafPeopleResults.csv_. Credit to our colleague and friend [Eric Hanson](https://github.com/ehanson8 "Eric's GitHub").
+This script looks for a CSV named _people.csv_ and then uses VIAF's "personalNames" index and retrieves VIAF, Library of Congress, and International Standard Name Identifier (ISNI) URIs for each potential match. These results are written to a new file named _viafPeopleResults.csv_. Credit to our friend and colleague [Eric Hanson](https://github.com/ehanson8 "Eric's GitHub").
+
+The format of the  _people.csv_ should look like this:
+
+| name          |
+| ------------- |
+| JK Rowling    |
+| Mark Twain    |
+| Adams, Douglas| 
+
+
+You can run this script by typing `python viafReconciliationPeople.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and your _people.csv_ is saved. An output file named _viafPeopleResults.csv_ will appear in the same directory.
