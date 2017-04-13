@@ -61,65 +61,60 @@ ASoutput = requests.get(baseURL + query, headers=headers).json()
 #archiveit_coll = raw_input('Enter the Archive-It collection number: ')
 archiveit_coll = '3181'
 
-# search AS for url's included as the title field in an AS archival_object with level "Web archive"
-urls = []
-for value in gen_dict_extract('title', ASoutput):
-    urls.append(value)
+# search AS for archival_object's with level "Web archive"
+for ao in ASoutput['results']:
+    url = ao['title']
+    uri = ao['uri']
 
-# search AS and store uri for AS archival_object with level "Web archive"
-aos = []
-for value in gen_dict_extract('uri', ASoutput):
-    aos.append(value)
-
-# search AI and get json of crawls for url listed in AS ao's title field
-for url in urls:
-    json.dumps(url)
+    # search AI and get json of crawls for url listed in AS ao's title field
     request = 'http://wayback.archive-it.org/' + archiveit_coll + '/timemap/json/' + url
     AIoutput = requests.get(request).json()
 
-# take AI json lists and convert to python dicts
-keys = AIoutput[0]
-crawlList = []
-for i in range (1, len (AIoutput)):
-    AIlist = AIoutput[i]
-    crawl = {}
-    for j in range (0, len(AIlist)):
-        crawl[keys[j]] = AIlist[j]
-    crawlList.append(crawl)
+    # take AI json lists and convert to python dicts
+    keys = AIoutput[0]
+    crawlList = []
+    for i in range (1, len (AIoutput)):
+        AIlist = AIoutput[i]
+        crawl = {}
+        for j in range (0, len(AIlist)):
+            crawl[keys[j]] = AIlist[j]
+        crawlList.append(crawl)
 
-# construct json to post to AS
-doList = []
-for crawl in crawlList:
-    ASpost = {}
-    ASpost['digital_object_id'] = 'https://wayback.archive-it.org' + '/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
-    ASpost['title'] = 'Web crawl of ' + crawl['original']
-    ASpost['dates'] = [{'expression': crawl['timestamp'], 'date_type': 'single', 'label': 'creation'}]
-    ASpost['file_versions'] = [{'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}]
-    post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=json.dumps(ASpost)).json()
-    doItem = {}
-    doItem['digital_object'] = {'ref': post['uri']}
-    doItem['instance_type'] = 'digital_object'
-    doList.append(doItem)
-print doList
-# aoUpdate = requests.post(baseURL + '/repositories/2/archival_objects/66', headers=headers, data=json.dumps(doList)).json
-# print aoUpdate
-
-#What it should look like:
-  # "instances": [
-  # "digital_object":
-  # {"ref": "/repositories/2/digital_objects/223"},
-  # instance_type": "digital_object"},
-  # "digital_object":
-  # {"ref": "/repositories/2/digital_objects/224"},
-  # instance_type": "digital_object"}
-  # ],
-
-# TO DO
-# Parse dates for ArchivesSpace record, push to AOs above
-# Add phystech stating "Archived website" to ASpace resource record
-
-# show script runtime
-elapsedTime = time.time() - startTime
-m, s = divmod(elapsedTime, 60)
-h, m = divmod(m, 60)
-print 'Post complete. Total script run time: ', '%d:%02d:%02d' % (h, m, s)
+    # construct json to post to AS
+    doList = []
+    for crawl in crawlList:
+        ASpost = {}
+        doid = 'https://wayback.archive-it.org' + '/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
+        ASpost['digital_object_id'] = doid
+        query = '/search?page=1&page_size=100&filter_term[]={"primary_type":"digital_object"}&q=' + doid
+        existingdoID = requests.get(baseURL + query, headers=headers).json()
+        if len(existingdoID['results']) != 0:
+            print 'Digital object already exists.'
+        else:
+            ASpost['title'] = 'Web crawl of ' + crawl['original']
+            ASpost['dates'] = [{'expression': crawl['timestamp'], 'date_type': 'single', 'label': 'creation'}]
+            ASpost['file_versions'] = [{'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}]
+            post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=json.dumps(ASpost)).json()
+            doItem = {}
+            doItem['digital_object'] = {'ref': post['uri']}
+            doItem['instance_type'] = 'digital_object'
+            doList.append(doItem)
+            if doList != []:
+                aoGet = requests.get(baseURL + uri, headers=headers).json()
+                existingInstances = aoGet['instances']
+                existingInstances = existingInstances + doList
+                aoGet['instances'] = existingInstances
+            print json.dumps(aoGet)
+            aoUpdate = requests.post(baseURL + uri, headers=headers, data=json.dumps(aoGet)).json()
+            print aoUpdate
+            aoGet = []
+# #
+# # TO DO
+# # Parse dates for ArchivesSpace record, push to AOs above
+# # Add phystech stating "Archived website" to ASpace resource record
+#
+# # show script runtime
+# elapsedTime = time.time() - startTime
+# m, s = divmod(elapsedTime, 60)
+# h, m = divmod(m, 60)
+# print 'Post complete. Total script run time: ', '%d:%02d:%02d' % (h, m, s)
