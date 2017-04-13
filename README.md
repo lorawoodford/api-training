@@ -77,3 +77,7 @@ You can run this script by typing `python postBarcodes.py` in cygwin/the Mac ter
 This script assigns a single container profile to all the containers in a collection. This can be done in the actual AS interface, but serves as a good example of a more complex script. The first few actions of the script would be a good starting point for any API action that requires identifying all the containers associated with a single collection.
 
 You can run this script by typing `python asLinkProfiles.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and [secrets.py](../master/secrets.py) are both saved. This script first prompts the user for a resource number, goes and fetches all the containers associated with that resource, then prompts the user for a container profile number, and then creates the link between each container and that profile. Note that there must already be container profiles in AS for this script to work.
+
+
+## [viafReconciliationPeople.py](../master/viafReconciliationPeople.py)
+This script looks for a CSV named _people.csv_ and then uses VIAF's "personalNames" index and retrieves VIAF, Library of Congress, and International Standard Name Identifier (ISNI) URIs for each potential match. These results are written to a new file named _viafPeopleResults.csv_. Credit to our colleague and friend [Eric Hanson](https://github.com/ehanson8 "Eric's GitHub").
