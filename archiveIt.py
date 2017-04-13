@@ -88,6 +88,7 @@ for i in range (1, len (AIoutput)):
     crawlList.append(crawl)
 
 # construct json to post to AS
+doList = []
 for crawl in crawlList:
     ASpost = {}
     ASpost['digital_object_id'] = 'https://wayback.archive-it.org' + '/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
@@ -95,11 +96,22 @@ for crawl in crawlList:
     ASpost['dates'] = [{'expression': crawl['timestamp'], 'date_type': 'single', 'label': 'creation'}]
     ASpost['file_versions'] = [{'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}]
     post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=json.dumps(ASpost)).json()
-    print post
-    aoGet = requests.get(baseURL + aos[0], headers=headers).json()
-    aoGet['instances'] = [{'digital_object': {'ref': post['uri']}, 'instance_type': 'digital_object'}]
-    aoUpdate = requests.post(baseURL + aos[0], headers=headers, data=json.dumps(aoGet)).json()
-    print aoUpdate
+    doItem = {}
+    doItem['instances'] = [{'instance_type': 'digital_object', 'digital_object': {'ref': post['uri']}}]
+    doList.append(doItem)
+print doList
+# aoUpdate = requests.post(baseURL + '/repositories/2/archival_objects/66', headers=headers, data=json.dumps(doList))
+# print aoUpdate
+
+#What it should look like:
+  # "instances": [
+  # "digital_object":
+  # {"ref": "/repositories/2/digital_objects/223"},
+  # instance_type": "digital_object"},
+  # "digital_object":
+  # {"ref": "/repositories/2/digital_objects/224"},
+  # instance_type": "digital_object"}
+  # ],
 
 # TO DO
 # Parse dates for ArchivesSpace record, push to AOs above
