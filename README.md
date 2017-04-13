@@ -66,12 +66,14 @@ Once you download, populate this secrets file with your own information.
 ## [postContainerProfiles.py](../master/postContainerProfiles.py)
 This script sources from [containerProfiles.json](../master/containerProfiles.json) to post container profiles into ArchivesSpace. Both files must be downloaded to the same directory for this script to run. You can edit [containerProfiles.json](../master/containerProfiles.json) if you'd like to try posting in different profiles.
 
-You can run this script by typing `python postContainerProfiles.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac ternimal from the directory where the script is stored.
+You can run this script by typing `python postContainerProfiles.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script, the source .json, and [secrets.py](../master/secrets.py) are all saved.
 
-## postBarcodes.py
+## [postBarcodes.py](../master/postBarcodes.py)
 This script sources from [barcodes.csv](../master/barcodes.csv) to post barcodes into ArchivesSpace. Both files must be downloaded to the same directory for this script to run. You can edit [barcodes.csv](../master/barcodes.csv) if you'd like to try posting in different barcodes.
 
-## asLinkProfiles.py
+You can run this script by typing `python postBarcodes.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script, the source .csv, and [secrets.py](../master/secrets.py) are all saved.
+
+## [asLinkProfiles.py](../master/asLinkProfiles.py)
 This script assigns a single container profile to all the containers in a collection. This can be done in the actual AS interface, but serves as a good example of a more complex script. The first few actions of the script would be a good starting point for any API action that requires identifying all the containers associated with a single collection.
 
 This script first prompts the user for a resource number, goes and fetches all the containers associated with that resource, then prompts the user for a container profile number, and then creates the link between each container and that profile. Note that there must already be container profiles in AS for this script to work.
