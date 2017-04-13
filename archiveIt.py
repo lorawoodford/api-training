@@ -97,10 +97,11 @@ for crawl in crawlList:
     ASpost['file_versions'] = [{'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}]
     post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=json.dumps(ASpost)).json()
     doItem = {}
-    doItem['instances'] = [{'instance_type': 'digital_object', 'digital_object': {'ref': post['uri']}}]
+    doItem['digital_object'] = {'ref': post['uri']}
+    doItem['instance_type'] = 'digital_object'
     doList.append(doItem)
 print doList
-# aoUpdate = requests.post(baseURL + '/repositories/2/archival_objects/66', headers=headers, data=json.dumps(doList))
+# aoUpdate = requests.post(baseURL + '/repositories/2/archival_objects/66', headers=headers, data=json.dumps(doList)).json
 # print aoUpdate
 
 #What it should look like:
