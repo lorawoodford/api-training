@@ -31,17 +31,16 @@ This is a subtly different question from the above. This section gives practical
 
 * *Mac users*
 
-   There is a reason why developers love Macs: they're easy! You should be able to run these scripts directly from the terminal with no problem. However, you may encounter other scripts that don't run: you're probably missing packages. Our best advice is to Google the exact error message that pops up (if one does), and chances are you'll find the solution online.
+   There is a reason why developers love Macs! You should be able to run these scripts directly from the terminal with no problem. However, you may encounter other scripts that don't run: you're probably missing packages. Our best advice is to Google the exact error message that pops up (if one does), and chances are you'll find the solution online.
 
-Instructions   
+More FYIs to read  
 
-   1. You'll always need at least two things to run one of our scripts: the script itself and the secrets.py file, and they must both be in the same directory.
+   1. You'll always need at least two things to run one of our scripts: _the script itself_ and _the secrets.py file_, and they must both be in the same directory.
    2. A brief description of what each script does follows this long introduction. You used each of these scripts in the workshop itself, and so these descriptions will be familiar. These scripts, as opposed to the ones offered in the _additional resources_ subfolder, above, are highly specific to the workshop, but if you're interested in learning Python, it may help to look at a script you've already used.
 
 
-
-## Authenticating with secrets.py
-Note: secrets._pyc_ is created automatically; you do not need to download it. You're only downloading secrets.py
+## Authenticating with [secrets.py](../blob/master/secrets.py)
+Note: You're only downloading secrets.py; secrets._pyc_ is created automatically and you do not need to download it.
 
 Several of these scripts used for interacting with the ArchivesSpace API call a separate secrets.py that should be in the following format:
 
@@ -56,10 +55,18 @@ backendurl='archivesspace.fakelibrary.edu:8089'
 user='archivist21'
 password='guest1234'
 ```
+For the vagrant:
+```
+backendurl='localhost:8089'
+user='admin'
+password='admin'
+```
 Once you download, populate this secrets file with your own information.
 
 ## postContainerProfiles.py
-This script sources from _containerProfiles.json_ to post container profiles into ArchivesSpace. Both files must be dowbloaded to the same directory for this script to run. You can edit _containerProfiles.json_ if you'd like to try posting in different profiles.
+This script sources from _containerProfiles.json_ to post container profiles into ArchivesSpace. Both files must be downloaded to the same directory for this script to run. You can edit _containerProfiles.json_ if you'd like to try posting in different profiles.
+
+You can run this script by typing `python postContainerProfiles.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac ternimal from the directory where the script is stored.
 
 ## postBarcodes.py
 This script sources from _barcodes.csv_ to post barcodes into ArchivesSpace. Both files must be downloaded to the same directory for this script to run. You can edit _barcodes.csv_ if you'd like to try posting in different barcodes.
