@@ -1,15 +1,13 @@
-# For original script by Eric Hanson, see: https://github.com/ehanson8/viaf-dbpedia-reconciliation-python/blob/master/viafReconciliationPeople.py
-
 import requests
 import csv
 from fuzzywuzzy import fuzz
 import json
 import urllib
 
-baseURL = 'http://viaf.org/viaf/search/viaf?query=local.personalNames+%3D+%22'
-f=csv.writer(open('viafPeopleResults.csv', 'wb'))
+baseURL = 'http://viaf.org/viaf/search/viaf?query=local.corporateNames+%3D+%22'
+f=csv.writer(open('viafCorporateResults.csv', 'wb'))
 f.writerow(['search']+['result']+['viaf']+['lc']+['isni']+['ratio']+['partialRatio']+['tokenSort']+['tokenSet']+['avg'])
-with open('people.csv') as csvfile:
+with open('organizations.csv') as csvfile:
     reader = csv.DictReader(csvfile)
     for row in reader:
         name = str(row['name'])
