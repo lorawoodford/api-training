@@ -87,10 +87,10 @@ The format of the  _organizations.csv_ should look like this:
 | ------------- |
 | Apple Inc.    |
 | New York Public Library   |
-| Library of COngress|
+| Library of Congress|
 
 
-You can run this script by typing `python viafReconciliationPeople.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and your _organizations.csv_ is saved. An output file named _viafCorporateResults.csv_ will appear in the same directory.
+You can run this script by typing `python viafReconciliationPeople.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and your _organizations.csv_ is saved. An output file named _viafCorporateResults.csv_ will appear in the same directory, which you can post to ASpace using [postVIAFOrganizations.py](../master/postVIAFOrganizations.py).
 
 
 ## [postVIAFOrganizations.py](../master/postVIAFOrganizations.py)
