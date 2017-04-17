@@ -54,14 +54,16 @@ print 'This script is used to generate new digital objects within an ArchivesSpa
 # for value in gen_dict_extract('id', ASoutput):
 #     resources.append(value)
 
-# GET each ao linked to in resources and add to aos
-query = '/search?page=1&filter_term[]={"primary_type":"archival_object"}&filter_term[]={"level":"Web archive"}'
-ASoutput = requests.get(baseURL + query, headers=headers).json()
-
-#archiveit_coll = raw_input('Enter the Archive-It collection number: ')
+# archiveit_coll = raw_input('Enter the Archive-It collection number: ')
+# Note: will have to deal with the fact that this should be able to be run for multiple AI collections.
 archiveit_coll = '3181'
 
 # search AS for archival_object's with level "Web archive"
+query = '/search?page=1&filter_term[]={"primary_type":"archival_object"}&filter_term[]={"level":"Web archive"}'
+ASoutput = requests.get(baseURL + query, headers=headers).json()
+print 'Found ' + str(len(ASoutput['results'])) + ' archival objects with the instance type "Web archive."'
+
+# grab needed fields out of ao
 for ao in ASoutput['results']:
     url = ao['title']
     uri = ao['uri']
@@ -69,6 +71,7 @@ for ao in ASoutput['results']:
     # search AI and get json of crawls for url listed in AS ao's title field
     request = 'http://wayback.archive-it.org/' + archiveit_coll + '/timemap/json/' + url
     AIoutput = requests.get(request).json()
+    print 'Found ' + str(len(AIoutput)-1) + ' Archive-It crawls of ' + url + '.'
 
     # take AI json lists and convert to python dicts
     keys = AIoutput[0]
@@ -80,11 +83,10 @@ for ao in ASoutput['results']:
             crawl[keys[j]] = AIlist[j]
         crawlList.append(crawl)
 
-    # construct json to post to AS
-    doList = []
+    # construct digital object json from Archive-It output and post to AS
     for crawl in crawlList:
         doid = 'https://wayback.archive-it.org' + '/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
-        query = '/search?page=1&page_size=100&filter_term[]={"primary_type":"digital_object"}&q=' + doid
+        query = '/search?page=1&filter_term[]={"primary_type":"digital_object"}&q=' + doid
         existingdoID = requests.get(baseURL + query, headers=headers).json()
         if len(existingdoID['results']) != 0:
             print 'Digital object already exists.'
@@ -95,14 +97,36 @@ for ao in ASoutput['results']:
             doPost['dates'] = [{'expression': crawl['timestamp'], 'date_type': 'single', 'label': 'creation'}]
             doPost['file_versions'] = [{'file_uri': crawl['filename'], 'checksum': crawl['digest'], 'checksum_method': 'sha-1'}]
             doJson = json.dumps(doPost)
+        if doPost != []:
             post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=doJson).json()
-            for i in post:
-                doItem = {}
-                doItem['digital_object'] = {'ref': post['uri']}
-                doItem['instance_type'] = 'digital_object'
-                doList.append(doItem)
-                doListJson = json.dumps(doList)
-                print doListJson 
+            print post
+    #print 'Posted new digital objects to ArchivesSpace.'
+            for do in doPost:
+                if post != []:
+                    doList = []
+                    doItem = {}
+                    doItem['digital_object'] = {'ref': post['uri']}
+                    doItem['instance_type'] = 'digital_object'
+                    doList.append(doItem)
+                    doListJson = json.dumps(doList)
+                print doListJson
+
+
+    # get aos that need to be updated
+    aostoLink = requests.get(baseURL + uri, headers=headers).json()
+    print aostoLink
+
+
+
+    #         for i in post:
+    #             doItem = {}
+    #             doItem['digital_object'] = {'ref': post['uri']}
+    #             doItem['instance_type'] = 'digital_object'
+    #             doList.append(doItem)
+    #             doListJson = json.dumps(doList)
+    #             print doListJson
+                # if doListJson != []:
+
                 #find a way to post just the last
             # doList keeps agregating and the final array has everything for a single ao in it...
                 # if doList != []:
