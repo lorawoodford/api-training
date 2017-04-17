@@ -94,6 +94,6 @@ You can run this script by typing `python viafReconciliationPeople.py` in cygwin
 
 
 ## [postVIAFOrganizations.py](../master/postVIAFOrganizations.py)
-This script looks for the CSV called _viafCorporateResults.csv_ created by running [viafReconciliationCorporate.py](../master/viafReconciliationCorporate.py), converts those reults to JSON on the fly, and then posts the resulting corporate agent records to ArchivesSpace as new records (not: this script does not edit pre-existing records, though that is possible).
+This script looks for the CSV called _viafCorporateResults.csv_ created by running [viafReconciliationCorporate.py](../master/viafReconciliationCorporate.py), converts those reults to JSON on the fly, and then posts the resulting corporate agent records to ArchivesSpace as new records (note: this script does not edit pre-existing agent records, though that is possible).
 
 You can run this script by typing `python postVIAFOrganizations.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and your _viafCorporateResults.csv_ is saved.
