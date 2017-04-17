@@ -79,9 +79,9 @@ This script assigns a single container profile to all the containers in a collec
 You can run this script by typing `python asLinkProfiles.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and [secrets.py](../master/secrets.py) are both saved. This script first prompts the user for a resource number, goes and fetches all the containers associated with that resource, then prompts the user for a container profile number, and then creates the link between each container and that profile. Note that there must already be container profiles in AS for this script to work.
 
 ## [viafReconciliationCorporate.py](../master/viafReconciliationCorporate.py)
-This script looks for a CSV named _organizations.csv_ and then uses VIAF's "corporateNames" index and retrieves VIAF, Library of Congress, and International Standard Name Identifier (ISNI) URIs for each potential match. These results are written to a new file named _viafCorporateResults.csv_. Credit to our friend and colleague [Eric Hanson](https://github.com/ehanson8 "Eric's GitHub").
+This script looks for a CSV named _organizations.csv_ and then uses VIAF's "corporateNames" index and retrieves VIAF, Library of Congress, and International Standard Name Identifier (ISNI) URIs for each potential match. These results are written to a new file named _viafCorporateResults.csv_. Credit for this script goes to our friend and colleague [Eric Hanson](https://github.com/ehanson8 "Eric's GitHub").
 
-The format of the  _people.csv_ should look like this:
+The format of the  _organizations.csv_ should look like this:
 
 | name          |
 | ------------- |
@@ -91,3 +91,9 @@ The format of the  _people.csv_ should look like this:
 
 
 You can run this script by typing `python viafReconciliationPeople.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and your _organizations.csv_ is saved. An output file named _viafCorporateResults.csv_ will appear in the same directory.
+
+
+## [postVIAFOrganizations.py](../master/postVIAFOrganizations.py)
+This script looks for the CSV called _viafCorporateResults.csv_ created by running [viafReconciliationCorporate.py](../master/viafReconciliationCorporate.py), converts those reults to JSON on the fly, and then posts the resulting corporate agent records to ArchivesSpace as new records (not: this script does not edit pre-existing records, though that is possible).
+
+You can run this script by typing `python postVIAFOrganizations.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and your _viafCorporateResults.csv_ is saved.
