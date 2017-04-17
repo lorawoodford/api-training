@@ -1,4 +1,4 @@
-# This script takes people.csv and posts the individuals as agents to ArchivesSpace.
+# This script takes viafCorporateResults.csv and posts the organizations as corporate_entities to ArchivesSpace.
 
 import json, requests, secrets, csv
 
@@ -19,28 +19,7 @@ csv = csv.DictReader(open(targetFile))
 orgList = []
 for row in csv:
     orgRecord = {}
-    orgRecord['primary_name'] = row['result']
-    orgRecord['authority_id'] = row['viaf']
+    orgRecord['names'] = [{'primary_name': row['result'], 'sort_name': row['result'], 'source': 'viaf', 'authority_id': row['viaf']}]
     orgRecord = json.dumps(orgRecord)
-    print orgRecord
-    # post = requests.post(baseURL + '/repositories/3/top_orgs', headers=headers, data=orgRecord).json()
-    # print post
-    # orgList.append(post['uri'].encode('utf-8'))
-
-# asRecord = requests.get(baseURL+'/repositories/3/'+targetRecord, headers=headers).json()
-# instanceArray = asRecord['instances']
-#
-# for i in range (0, len (orgList)):
-#     top_org = {}
-#     top_org['ref'] = orgList[i]
-#     sub_org = {}
-#     sub_org['top_org'] = top_org
-#     instance = {}
-#     instance['sub_org'] = sub_org
-#     instance['instance_type'] = 'mixed_materials'
-#     instanceArray.append(instance)
-#
-# asRecord['instances'] = instanceArray
-# asRecord = json.dumps(asRecord)
-# post = requests.post(baseURL+'/repositories/2/'+targetRecord, headers=headers, data=asRecord).json()
-# print post
+    post = requests.post(baseURL + '/agents/corporate_entities', headers=headers, data=orgRecord).json()
+    print post
