@@ -14,7 +14,7 @@ This script looks for a CSV named _people.csv_ and then uses VIAF's "personalNam
 
 
 ## [viafReconciliationPeople.py](../master//additional%20resources/viafReconciliationPeople.py)
-SImilar tothe script we ran in the workshop (viafReconciliationCorporate.py) This script looks for a CSV named _people.csv_ and then uses VIAF's "personalNames" index and retrieves VIAF, Library of Congress, and International Standard Name Identifier (ISNI) URIs for each potential match. These results are written to a new file named _viafPeopleResults.csv_. Credit to our friend and colleague [Eric Hanson](https://github.com/ehanson8 "Eric's GitHub").
+Similar to the script we ran in the workshop (viafReconciliationCorporate.py) This script looks for a CSV named _people.csv_ and then uses VIAF's "personalNames" index and retrieves VIAF, Library of Congress, and International Standard Name Identifier (ISNI) URIs for each potential match. These results are written to a new file named _viafPeopleResults.csv_. Credit to our friend and colleague [Eric Hanson](https://github.com/ehanson8 "Eric's GitHub").
 
 The format of the  _people.csv_ should look like this:
 

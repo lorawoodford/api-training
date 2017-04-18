@@ -36,11 +36,11 @@ This is a subtly different question from the above. This section gives practical
 More FYIs to read  
 
    1. You'll always need at least two things to run one of our scripts: _the script itself_ and _the secrets.py file_, and they must both be in the same directory.
-   2. A brief description of what each script does follows this long introduction. You used each of these scripts in the workshop itself, and so these descriptions will be familiar. These scripts, as opposed to the ones offered in the _additional resources_ subfolder, above, are highly specific to the workshop, but if you're interested in learning Python, it may help to look at a script you've already used.
+   2. A brief description of what each script does follows this long introduction. You used each of these scripts in the workshop itself, and so these descriptions will be familiar. These scripts, as opposed to the ones offered in the [_additional resources_](../master//additional%20resources) subfolder, above, are highly specific to the workshop, but if you're interested in learning Python, it may help to look at a script you've already used.
 
 
 ## Authenticating with [secrets.py](../master/secrets.py)
-Note: You're only downloading [secrets.py](../master/secrets.py); secrets._pyc_ is created automatically and you do not need to download it.
+Note: You're only downloading/editing [secrets.py](../master/secrets.py); secrets._pyc_ is created automatically and you do not need to download or edit it.
 
 Several of our scripts used for interacting with the ArchivesSpace API call a separate secrets.py that should be in the following format:
 
@@ -94,6 +94,6 @@ You can run this script by typing `python viafReconciliationPeople.py` in cygwin
 
 
 ## [postVIAFOrganizations.py](../master/postVIAFOrganizations.py)
-This script looks for the CSV called _viafCorporateResults.csv_ created by running [viafReconciliationCorporate.py](../master/viafReconciliationCorporate.py), converts those reults to JSON on the fly, and then posts the resulting corporate agent records to ArchivesSpace as new records (note: this script does not edit pre-existing agent records, though that is possible).
+This script looks for the CSV called _viafCorporateResults.csv_ created by running [viafReconciliationCorporate.py](../master/viafReconciliationCorporate.py), converts those reults to JSON on the fly, and then posts the resulting corporate agent records to ArchivesSpace as new records (note: this script does not edit _pre-existing_ agent records, though that is possible with a script that first GETs the agents you have, runs them through the VIAF reconciliation, and then posts them back [saying all that isn't helpful if you don't have a script that does so, but that's how you start to game out what you need]).
 
 You can run this script by typing `python postVIAFOrganizations.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and your _viafCorporateResults.csv_ is saved.
