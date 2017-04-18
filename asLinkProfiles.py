@@ -44,6 +44,7 @@ while not is_connected:
 
 # provide instructions
 print 'This script is used to link all top_containers in a single collection (identified by the ArchivesSpace resource id number) to a single container_profile (identified by the ArchivesSpace container_profile id number).'
+raw_input('Press Enter to continue...')
 
 # have user enter resource id
 resource_id = raw_input('Enter resource id: ')

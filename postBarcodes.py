@@ -29,7 +29,8 @@ while not is_connected:
 	is_connected = test_connection()
 
 # print instructions
-print 'This script replace existing fauxcodes with real barcodes (linked in a separate csv file) in ArchivesSpace.'
+print 'This script replaces existing fauxcodes with real barcodes (linked in a separate csv file) in ArchivesSpace.'
+raw_input('Press Enter to continue...')
 
 # open csv and generate dict
 reader = csv.DictReader(open('barcodes.csv'))

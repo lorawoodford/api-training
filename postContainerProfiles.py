@@ -30,6 +30,7 @@ while not is_connected:
 
 # print instructions
 print 'This script will add the container_profiles included in a separate json file to ArchivesSpace.'
+raw_input('Press Enter to continue...')
 
 # post container_profiles
 print 'The following container profiles have been added to ArchivesSpace:'

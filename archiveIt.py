@@ -2,20 +2,6 @@ import requests, json, secrets, time, urllib
 
 startTime = time.time()
 
-# function to find key in nested dicts: see http://stackoverflow.com/questions/9807634/find-all-occurences-of-a-key-in-nested-python-dictionaries-and-lists
-def gen_dict_extract(key, var):
-    if hasattr(var,'iteritems'):
-        for k, v in var.iteritems():
-            if k == key:
-                yield v
-            if isinstance(v, dict):
-                for result in gen_dict_extract(key, v):
-                    yield result
-            elif isinstance(v, list):
-                for d in v:
-                    for result in gen_dict_extract(key, d):
-                        yield result
-
 # import secrets
 baseURL = secrets.baseURL
 user = secrets.user
@@ -43,19 +29,11 @@ while not is_connected:
 	is_connected = test_connection()
 
 # provide instructions
-print 'This script is used to generate new digital objects within an ArchivesSpace collection for websites crawled in an Archive-It collection.'
+print 'This script is used to generate new digital objects within an ArchivesSpace collection for websites crawled in an Archive-It collection.  Please note: This is a "proof of concept" script, NOT completed work.  Do not use in production scenarios.'
 
-# Find aspace resources that have subject of "Web sites"
-# endpoint = '/search?page=1&filter_term[]={"subjects":"Web+sites"}'
-# ASoutput = requests.get(baseURL + endpoint, headers=headers).json()
-
-# populate resources with the ids of each resource that contains the subject "Web sites"
-# resources = []
-# for value in gen_dict_extract('id', ASoutput):
-#     resources.append(value)
+raw_input('Press Enter to continue...')
 
 # archiveit_coll = raw_input('Enter the Archive-It collection number: ')
-# Note: will have to deal with the fact that this should be able to be run for multiple AI collections.
 archiveit_coll = '3181'
 
 # search AS for archival_object's with level "Web archive"
@@ -84,7 +62,8 @@ for ao in ASoutput['results']:
         crawlList.append(crawl)
 
     # construct digital object json from Archive-It output and post to AS
-    instances = []
+    print 'The following digital objects have been created in ArchivesSpace:'
+    newInstances = []
     for crawl in crawlList:
         doid = 'https://wayback.archive-it.org' + '/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
         query = '/search?page=1&filter_term[]={"primary_type":"digital_object"}&q=' + doid
@@ -104,19 +83,22 @@ for ao in ASoutput['results']:
             doItem = {}
             doItem['digital_object'] = {'ref': post['uri']}
             doItem['instance_type'] = 'digital_object'
-            instances.append(doItem)
+            newInstances.append(doItem)
     aoGet = requests.get(baseURL + uri, headers=headers).json()
     existingInstances = aoGet['instances']
-    existingInstances = existingInstances + instances
+    existingInstances = existingInstances + newInstances
     aoGet['instances'] = existingInstances
     aoUpdate = requests.post(baseURL + uri, headers=headers, data=json.dumps(aoGet)).json()
+    print 'The following archival objects have been updated in ArchivesSpace:'
     print aoUpdate
 
-# #
-# # TO DO
-# # Parse dates for ArchivesSpace record, push to AOs above
-# # Add phystech stating "Archived website" to ASpace resource record
-#
+# TO DO LATER
+# Parse dates for ArchivesSpace record, push to AOs above
+# Add phystech stating "Archived website" to ASpace resource record
+# Add "Web sites" subject tracing to ASpace resource record
+# Deal with the fact that this should be able to be run for multiple AI collections (at present limited to one declared in script)
+# Improve logic for determining whether something is a duplicate
+
 # show script runtime
 elapsedTime = time.time() - startTime
 m, s = divmod(elapsedTime, 60)

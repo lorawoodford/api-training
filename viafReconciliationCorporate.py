@@ -1,8 +1,11 @@
-import requests
-import csv
+import requests, csv, json, urllib
 from fuzzywuzzy import fuzz
-import json
-import urllib
+
+startTime = time.time()
+
+# print instructions
+print 'This script looks for a CSV named "organizations.csv" and then uses the VIAF "corporateNames" index to retrieve VIAF, Library of Congress, and International Standard Name Identifier (ISNI) URIs for each potential match. These results are written to a new file named "viafCorporateResults.csv." Credit for this script goes to our friend and colleague Eric Hanson.'
+raw_input('Press Enter to continue...')
 
 baseURL = 'http://viaf.org/viaf/search/viaf?query=local.corporateNames+%3D+%22'
 f=csv.writer(open('viafCorporateResults.csv', 'wb'))
@@ -43,3 +46,9 @@ with open('organizations.csv') as csvfile:
             lc = ''
             isni = ''
         f.writerow([name.strip()]+[label]+[viafid]+[lc]+[isni]+[ratio]+[partialRatio]+[tokenSort]+[tokenSet]+[avg])
+
+# show script runtime
+elapsedTime = time.time() - startTime
+m, s = divmod(elapsedTime, 60)
+h, m = divmod(m, 60)
+print 'Total script run time: ', '%d:%02d:%02d' % (h, m, s)
