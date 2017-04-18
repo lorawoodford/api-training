@@ -63,6 +63,13 @@ password='admin'
 ```
 Once you download, remember to change this secrets file as needed (i.e. you can't leave it set to the vagrant default and then try to connect to your instance of AS).
 
+
+## [proPublica.py](../master/proPublica.py)
+This script creates and saves a separate file called _proPublicaRecord.json_ containing the results of a proPublica search for "animal."
+
+You can run this script by typing `python proPublica.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script is saved, and an output file named _proPublicaRecord.json_ will appear in the same directory.
+
+
 ## [postContainerProfiles.py](../master/postContainerProfiles.py)
 This script sources from [containerProfiles.json](../master/containerProfiles.json) to post container profiles into ArchivesSpace. Both files must be downloaded to the same directory for this script to run. You can edit [containerProfiles.json](../master/containerProfiles.json) if you'd like to try posting in different profiles.
 
