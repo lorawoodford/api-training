@@ -3,15 +3,6 @@
         "extent_dimension": "width",
         "height": "3",
         "width": "12",
-        "depth": "15.5",
-        "dimension_units": "inches",
-        "jsonmodel_type": "container_profile"
-    },
-    {
-        "name": "Flat box01",
-        "extent_dimension": "width",
-        "height": "3",
-        "width": "12",
         "depth": "16",
         "dimension_units": "inches",
         "jsonmodel_type": "container_profile"
