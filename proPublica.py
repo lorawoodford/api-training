@@ -1,4 +1,4 @@
-import json, requests
+import json, requests, time
 
 startTime = time.time()
 
