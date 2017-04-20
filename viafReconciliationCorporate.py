@@ -1,4 +1,4 @@
-import requests, csv, json, urllib
+import requests, csv, json, urllib, time
 from fuzzywuzzy import fuzz
 
 startTime = time.time()

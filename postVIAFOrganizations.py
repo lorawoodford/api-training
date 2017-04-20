@@ -1,4 +1,4 @@
-import json, requests, secrets, csv
+import json, requests, secrets, csv, time
 
 startTime = time.time()
 
