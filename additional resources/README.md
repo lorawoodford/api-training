@@ -27,9 +27,14 @@ The format of the  _people.csv_ should look like this:
 
 You can run this script by typing `python viafReconciliationPeople.py` in cygwin/the Mac terminal. Remember that you need to be running cygwin/the Mac terminal from the directory where the script and your _people.csv_ is saved. An output file named _viafPeopleResults.csv_ will appear in the same directory.
 
+# Slides
+You will note some additional slides in this subfolder:
 
 ## ArchivesSpace_Phila2016_Celia-ODBC.pdf
 This is a pdf of a presentation given by Celia Caust-Ellenbogen (Swarthmore) crediting and explaining Nancy Enneking's (Getty) approach to connecting ArchivesSpace to Access through an ODBC connection. For those attendees that wish the API could assist in reporting and analysis, this is our recommended approach. Thanks to Celia for her permission to post these slides, and much credit and thanks to Nancy by proxy!
+
+## Did you vagrant destroy? (both .pdf and .pptx)
+These are slides meant specifically to review how to interact with the vagrant box after the workshop is over, and especially for those users who may have left it running by accident, or, needed to download the new version.
 
 
 
