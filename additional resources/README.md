@@ -36,7 +36,5 @@ This is a pdf of a presentation given by Celia Caust-Ellenbogen (Swarthmore) cre
 ## Did you vagrant destroy? (both .pdf and .pptx)
 These are slides meant specifically to review how to interact with the vagrant box after the workshop is over, and especially for those users who may have left it running by accident, or, needed to download the new version.
 
-
-
-
-http://www.gregwiedeman.com/presentations/slides/wasapi.html#/
+## [Automating Web Archives Records in ASpace](http://www.gregwiedeman.com/presentations/slides/wasapi.html#/)
+This presentation by Gregory Wiedeman (University Archivist at SUNY Albany) was Lora's inspiration for her Archive-It script. We do not offer it for download, just follow the link immediately above.
