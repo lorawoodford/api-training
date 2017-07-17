@@ -17,6 +17,7 @@ def findKey(d, key):
 baseURL = secrets.baseURL
 user = secrets.user
 password = secrets.password
+repository = secrets.repository
 
 resourceID= raw_input('Enter resource ID: ')
 
