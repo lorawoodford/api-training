@@ -96,14 +96,5 @@
         "depth": "7",
         "dimension_units": "inches",
         "jsonmodel_type": "container_profile"
-    },
-    {
-        "name": "Record center box",
-        "extent_dimension": "width",
-        "height": "10.5",
-        "width": "13.1",
-        "depth": "15.75",
-        "dimension_units": "inches",
-        "jsonmodel_type": "container_profile"
     }
 ]
