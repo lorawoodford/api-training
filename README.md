@@ -6,14 +6,14 @@ These scripts and this documentation, combined with the workshop itself, are mea
 
 ### How do I use these?
 
-First, a necessary disclaimer: **We highly recommend AGAINST making any changes or using any of these scripts against your working, or Production, instance of ArchivesSpace and/or with the only copy of existing Production data.** If you do not have a Development version of AS, see the take home documentation for advice on how to ask for one. Note that GET scripts are not that risky, so if you cannot or will not have a Dev instance of AS, you can still try GETs as your familiarize yourself with our scripts. If fear of making mistakes is holding you back, and rightly so, you should investigate options for running a Dev or Virtual Machine (VM) of AS. If your institution decides to ramp up its use of APIs, a testing environment is a necessity.
+First, a necessary disclaimer: **We highly recommend AGAINST making any changes or using any of these scripts against your working, or Production, instance of ArchivesSpace and/or with the only copy of existing Production data.** If you do not have a Development version of AS, you can contact us or show the vagrant you used in class as an example of how one might be set up for you. Note that GET scripts are not that risky, so if you cannot or will not have a Dev instance of AS, you can still try GETs as your familiarize yourself with our scripts. If fear of making mistakes is holding you back, and rightly so, you should investigate options for running a Dev or Virtual Machine (VM) of AS. If your institution decides to ramp up its use of APIs, a testing environment is a necessity.
 
 Second, remember the vagrant box that you were provided in the course of the workshop. That box, now stored locally on the laptop you brought to the workshop, is our gift to you. We encourage truly novice users who may be wary to try anything on real data to play in the vagrant virtual environment first. No matter what you do there you cannot break anything, and if you mess up your data, just blast away the vagrant box using the instructions provided in the workshop slides and then `vagrant up` again!
 
 There's very little data in the default box, but once you have it up and running you can:
 + manually enter data just like you would in AS
 + import your own collections via EAD
-+ more advanced users can use our GET scripts to pull down resource records from their own institutional instance of AS and POST them to the vagrant (remember that the vagrat endpoint will begin with http://localhost:8089)
++ more advanced users can use our GET scripts to pull down resource records from their own institutional instance of AS and POST them to the vagrant (remember that the vagrant endpoint will begin with http://localhost:8089)
 
 
 ### How do I _run_ these?
