@@ -37,7 +37,7 @@ raw_input('Press Enter to continue...')
 archiveit_coll = '3181'
 
 # search AS for archival_object's with level "Web archive"
-query = '/search?page=1&filter_term[]={"primary_type":"archival_object"}&filter_term[]={"level":"Web archive"}'
+query = '/search?page=1&filter={"query":{"jsonmodel_type":"boolean_query","op":"AND","subqueries":[{"jsonmodel_type":"field_query","field":"primary_type","value":"archival_object","literal":true},{"jsonmodel_type":"field_query","field":"level","value":"Web%20archive","literal":true}]}}'
 ASoutput = requests.get(baseURL + query, headers=headers).json()
 print 'Found ' + str(len(ASoutput['results'])) + ' archival objects with the instance type "Web archive."'
 
@@ -66,7 +66,7 @@ for ao in ASoutput['results']:
     newInstances = []
     for crawl in crawlList:
         doid = 'https://wayback.archive-it.org' + '/' + archiveit_coll + '/' + crawl['timestamp'] + '/' + crawl['original']
-        query = '/search?page=1&filter_term[]={"primary_type":"digital_object"}&q=' + doid
+        query = '/search?page=1&filter={"query":{"jsonmodel_type":"boolean_query","op":"AND","subqueries":[{"jsonmodel_type":"field_query","field":"primary_type","value":"digital_object","literal":true},{"jsonmodel_type":"field_query","field":"digital_object_id","value":"' + doid + '","literal":true}]}}'
         existingdoID = requests.get(baseURL + query, headers=headers).json()
         doPost = {}
         if len(existingdoID['results']) != 0:
