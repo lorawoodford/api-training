@@ -37,7 +37,7 @@ raw_input('Press Enter to continue...')
 archiveit_coll = '3181'
 
 # search AS for archival_object's with level "Web archive"
-query = '/search?page=1&filter={"query":{"jsonmodel_type":"boolean_query","op":"AND","subqueries":[{"jsonmodel_type":"field_query","field":"primary_type","value":"archival_object","literal":true},{"jsonmodel_type":"field_query","field":"level","value":"Web%20archive","literal":true}]}}'
+query = '/search?page=1&filter={"query":{"jsonmodel_type":"boolean_query","op":"AND","subqueries":[{"jsonmodel_type":"field_query","field":"primary_type","value":"archival_object","literal":true},{"jsonmodel_type":"field_query","field":"level","value":"Web archive","literal":true},{"jsonmodel_type":"field_query","field":"types","value":"pui","literal":true}]}}'
 ASoutput = requests.get(baseURL + query, headers=headers).json()
 print 'Found ' + str(len(ASoutput['results'])) + ' archival objects with the instance type "Web archive."'
 
