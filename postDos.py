@@ -42,7 +42,11 @@ for row in csv_dict:
 	file_uri = row['fileuri']
 	title = row['title']
 	digital_object_id = row['objectid']
-	doRecord = {'title': title, 'digital_object_id': digital_object_id, 'publish': False}
+	ref_ID = row['refID']
+	AOquery = '/search?page=1&filter={"query":{"jsonmodel_type":"boolean_query","op":"AND","subqueries":[{"jsonmodel_type":"field_query","field":"primary_type","value":"archival_object","literal":true},{"jsonmodel_type":"field_query","field":"ref_id","value":"' + ref_ID + '","literal":true},{"jsonmodel_type":"field_query","field":"types","value":"pui","literal":true}]}}'
+	AOsearch = requests.get(baseURL + AOquery, headers=headers).json()
+	linked_ao = AOsearch['results'][0]['uri']
+	doRecord = {'title': title, 'digital_object_id': digital_object_id, 'publish': False, 'linked_instances': [{'ref': linked_ao}]}
 	doRecord['file_versions'] = [{'file_uri': file_uri, 'publish': False, 'file_format_name': 'jpeg'}]
 	doRecord = json.dumps(doRecord)
 	post = requests.post(baseURL + '/repositories/2/digital_objects', headers=headers, data=doRecord).json()
@@ -52,7 +56,7 @@ for row in csv_dict:
 	f.writerow([title]+[digital_object_id]+[uri])
 
 # Feedback to user
-print 'New .csv saved to working directory.'
+print 'New .csv saved to working directory.  Go have a look!'
 
 # show script runtime
 elapsedTime = time.time() - startTime

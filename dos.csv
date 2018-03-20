@@ -1,7 +1,7 @@
-title,objectid,fileuri
-Digitized Photos of Important People,pic001,path/to/archival/storage/pic001
-VIPs like Valerie Addonizio,pic002,path/to/archival/storage/pic002
-And Lora Woodford,pic003,definitely/not/on/an/external/harddrive/pic003
-Jumbo the Elephant?,pic004,path/to/archival/storage/pic004
-Handsome Dan?,pic005,path/to/archival/storage/pic005
-It's like we're in New England or something…,pic006,path/to/archival/storage/pic006
+title,objectid,fileuri,refID
+Digitized Photos of Important People,pic001,path/to/archival/storage/pic001,afc93ab7c0e1b9949603ce79a08987a8
+VIPs like Valerie Addonizio,pic002,path/to/new/jersey/monmouthco/warehouse/pic002,540019ac62c0767d0b099688a9ffaca5
+And Lora Woodford,pic003,definitely/not/on/an/external/harddrive/pic003,8a4eae486afed11aaf4620863ea326f2
+Jumbo the Elephant?,pic004,path/to/archival/storage/pic004,8624a39e58e206cd3b9d45ccb35dfb30
+Handsome Dan?,pic005,path/to/archival/storage/pic005,e14d0f101a0a8a87355eb8b6d95e8b3f
+It's like we're in New England or something…,pic006,path/to/archival/storage/pic006,31803846e42827eed3fcf4392ef0cc5b
